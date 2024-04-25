@@ -11776,10 +11776,26 @@ function setupParallax() {
 function setupFlash() {
   setInterval(function () {
     if ((0, _random.chance)(curWeatherData.flashChance)) {
-      flash(curWeatherData.bg, curWeatherData.fg, curWeatherData.flashBg, curWeatherData.flashFg);
+      var randomThunderFile = thunderFiles[Math.floor(Math.random() * thunderFiles.length)];
+      flash(curWeatherData.bg, curWeatherData.fg, curWeatherData.flashBg, curWeatherData.flashFg, randomThunderFile);
+      var audio = new Audio(audioFile);
+      audio.play();
     }
   }, 500);
 }
+
+// Define audio files
+var thunderFiles = ["sounds/thunder1.mp3", "sounds/thunder2.mp3", "sounds/thunder3.mp3"];
+
+// Function to play audio
+function playAudio(audioFile) {
+  var audio = new Audio(audioFile);
+  audio.play();
+  return new Promise(function(resolve) {
+    audio.onended = resolve;
+  });
+}
+
 function setupWeather() {
   setupWeatherData();
   window.addEventListener("hashchange", function (event) {
@@ -11935,6 +11951,7 @@ function flash(baseBg, baseFg, flashBg, flashFg) {
     transitionFlash(0, 0.4);
   });
 }
+
 function generateTextures(fg, bg) {
   var alpha = arguments.length <= 2 || arguments[2] === undefined ? 1 : arguments[2];
 

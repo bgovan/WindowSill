@@ -153,7 +153,9 @@ a:focus {
 	display: inline-block;
 	font-weight: bold;
 	color: #488bce;
+	text-decoration: none;
 }
+
 
 .codrops-demos a:not(:last-child) {
 	margin-right: 1em;
@@ -201,4 +203,30 @@ a:focus {
 		font-size: 120%;
 		margin: 1em 0 0 0;
 	}
+}
+/* Style for sliders container */
+.slider-container {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Style for sliders */
+.slider-container.active {
+    display: flex;
+}
+
+.slider-container input[type="range"] {
+    width: 150px;
+    margin-right: 10px;
+}
+
+/* Style for on/off button */
+.on-off-button {
+    background-color: #555;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
 }

@@ -40,10 +40,26 @@
 	<div class="container">
 		<header class="codrops-header" id="header">
 			<nav class="codrops-demos">
-				<a class="nav-item" href="#slide-1">Rainy</a>
-				<a class="nav-item" href="#slide-5">Thunder</a>
-				<a class="nav-item" href="#slide-3">Sunny</a>
+				<a onclick="toggleSliders(1)" class="nav-item" href="#slide-1">Rain</a>
+				<a onclick="toggleSliders(2)" class="nav-item" href="#slide-5">Thunder</a>
+				<a onclick="toggleSliders(3)" class="nav-item" href="#slide-3">Sunny</a>
 			</nav>
+			<!-- Slider containers -->
+    	<!-- Slider container for Button 1 -->
+    	<div class="slider-container" id="slider-container-1">
+        <input type="range" min="0" max="100" value="50">
+        <button class="on-off-button">On</button>
+    	</div>
+    	<!-- Slider container for Button 2 -->
+    	<div class="slider-container" id="slider-container-2">
+        <input type="range" min="0" max="100" value="50">
+        <input type="range" min="0" max="100" value="50">
+	    </div>
+	    <!-- Slider container for Button 3 -->
+	    <div class="slider-container" id="slider-container-3">
+        <input type="range" min="0" max="100" value="50">
+        <input type="range" min="0" max="100" value="50">
+	    </div>
 		</header>
 
 		<div class="slideshow">
@@ -83,6 +99,16 @@
 
   // Initially hide header
   hideHeader();
+
+
+  function toggleSliders(buttonIndex) {
+        var sliderContainers = document.querySelectorAll('.slider-container');
+        sliderContainers.forEach(container => {
+            container.classList.remove('active');
+        });
+        var sliderContainer = document.getElementById('slider-container-' + buttonIndex);
+        sliderContainer.classList.add('active');
+    }
 </script>
 
 
