@@ -38,6 +38,10 @@
 		<img src="img/weather/texture-drizzle-bg.png" />
 	</div>
 	<div class="container">
+		<audio id="audio" loop>
+        <source src="audio1.mp3" type="audio/mpeg">
+        <!-- Add additional <source> elements for other audio files -->
+    </audio>
 		<header class="codrops-header" id="header">
 			<nav class="codrops-demos">
 				<a onclick="toggleSliders(1)" class="nav-item" href="#slide-1">Rain</a>
@@ -47,7 +51,7 @@
 			<!-- Slider containers -->
     	<!-- Slider container for Button 1 -->
     	<div class="slider-container active" id="slider-container-1">
-        <input type="range" min="0" max="100" value="50">
+        <span id="audio-name">text</span><input type="range" min="0" max="3" value="1" onchange="changeAudio(this.value)">
         <button class="on-off-button">On</button>
     	</div>
     	<!-- Slider container for Button 2 -->
@@ -109,6 +113,40 @@
         var sliderContainer = document.getElementById('slider-container-' + buttonIndex);
         sliderContainer.classList.add('active');
     }
+
+    var audio = document.getElementById('audio');
+    var audioNameElement = document.getElementById('audio-name');
+
+    function changeAudio(value) {
+        var audioFile;
+
+
+        switch (value) {
+        	case(0):
+        		audio.pause();
+        		audioNameElement.textContent = 'No Rain';
+          	return;
+        	case(1):
+            audioFile = 'sounds/lightRain.mp3';
+            audioNameElement.textContent = 'Light Rain';
+        	case(2):
+            audioFile = 'sounds/heavyRain.mp3';
+            audioNameElement.textContent = 'Heavy Rain';
+          case(3):
+          	audioFile = 'sounds/windowRain.mp3';
+          	audioNameElement.textContent = 'Rain on Window';
+        }
+
+        // Change the audio source only if it's different from the current source
+        if (audio.src !== audioFile) {
+            audio.src = audioFile;
+            audio.play(); // Start playing the new audio
+        }
+    }
+
+    // Start playing audio1 by default
+    audio.src = 'sounds/lightRain.mp3';
+    audio.play();
 </script>
 
 
