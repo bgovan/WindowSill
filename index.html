@@ -39,7 +39,6 @@
 	</div>
 	<div class="container">
 		<audio id="audio" loop src="sounds/lightRain.mp3">
-        <source src="sounds/lightRain.mp3" type="audio/mpeg">
         <!-- Add additional <source> elements for other audio files -->
     </audio>
 		<header class="codrops-header" id="header">
@@ -120,22 +119,24 @@
     function changeAudio(value) {
         var audioFile;
 
-
-        switch (value) {
-        	case(0):
+        	if(value==0){
+        		console.log('hello')
         		audio.pause();
         		audioNameElement.textContent = 'No Rain';
           	return;
-        	case(1):
+          }
+        	else if(value == 1){
             audioFile = 'sounds/lightRain.mp3';
             audioNameElement.textContent = 'Light Rain';
-        	case(2):
+          }
+        	else if(value == 2){
             audioFile = 'sounds/heavyRain.mp3';
             audioNameElement.textContent = 'Heavy Rain';
-          case(3):
+          }
+          else if(value == 3){
           	audioFile = 'sounds/windowRain.mp3';
           	audioNameElement.textContent = 'Rain on Window';
-        }
+        	}
 
         // Change the audio source only if it's different from the current source
         if (audio.src !== audioFile) {
