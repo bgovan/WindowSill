@@ -50,7 +50,7 @@
 			<!-- Slider containers -->
     	<!-- Slider container for Button 1 -->
     	<div class="slider-container active" id="slider-container-1">
-        <span id="audio-name">text</span><input type="range" min="0" max="3" value="1" onchange="changeAudio(this.value)">
+        <span id="audio-name" style="padding:10px;">No Rain</span><input type="range" min="0" max="3" value="0" onchange="changeAudio(this.value)">
         <button class="on-off-button">On</button>
     	</div>
     	<!-- Slider container for Button 2 -->
@@ -116,13 +116,25 @@
     var audio = document.getElementById('audio');
     var audioNameElement = document.getElementById('audio-name');
 
+		function fadeOutAudio() {
+        var volume = audio.volume;
+        if (volume > 0) {
+            audio.volume =Math.round((audio.volume - 0.05)*100)/100; // Decrease volume by 0.05 every 50 milliseconds
+        } else {
+            clearInterval(fadeOutInterval); // Stop the fading out process
+            audio.pause(); // Pause audio when volume reaches 0
+            audio.volume = 1;
+        }
+    }
+
+
     function changeAudio(value) {
         var audioFile;
 
         	if(value==0){
-        		console.log('hello')
-        		audio.pause();
+        		audioFile = 'none'; // No audio file to play when value is 0
         		audioNameElement.textContent = 'No Rain';
+        		fadeOutInterval = setInterval(fadeOutAudio, 75);
           	return;
           }
         	else if(value == 1){
@@ -143,11 +155,21 @@
             audio.src = audioFile;
             audio.play(); // Start playing the new audio
         }
+        // Automatically restart the audio when it reaches the end
+        
     }
 
-    // Start playing audio1 by default
-    audio.src = 'sounds/lightRain.mp3';
-    audio.play();
+    // Start playing audio by default
+    //audio.src = 'sounds/lightRain.mp3';
+    //audio.play();
+
+    // audio.addEventListener('timeupdate', function(){
+    //         var buffer = 1;
+    //         if(this.currentTime > this.duration - buffer){
+    //             this.currentTime = 0;
+    //             this.play();
+    //         }
+    //     });
 </script>
 
 
