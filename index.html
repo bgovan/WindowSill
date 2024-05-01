@@ -51,7 +51,8 @@
     	<!-- Slider container for Button 1 -->
     	<div class="slider-container active" id="slider-container-1">
         <span id="audio-name" style="padding:10px;">No Rain</span><input type="range" min="0" max="3" value="0" onchange="changeAudio(this.value)">
-        <button class="on-off-button">On</button>
+        //add onclick event to on-off-button
+		<button class="on-off-button">On</button>
     	</div>
     	<!-- Slider container for Button 2 -->
     	<div class="slider-container" id="slider-container-2">
@@ -170,6 +171,13 @@
     //             this.play();
     //         }
     //     });
+
+
+	//on off button change url to #slide-5
+	var onOffButton = document.querySelector('.on-off-button');
+	onOffButton.addEventListener('click', function() {
+		window.location.hash = 'slide-5';
+	});
 </script>
 
 
